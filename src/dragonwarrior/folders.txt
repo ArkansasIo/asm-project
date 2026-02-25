@@ -1,0 +1,18 @@
+src/dragonwarrior/
+    main.asm
+    map.asm
+    battle.asm
+    menu.asm
+    data.asm
+    graphics.asm
+    sound.asm
+    console_build.asm
+    editor_graphics.asm
+    editor_algo.asm
+    editor_integration.asm
+    editor_menu.asm
+    editor_tools.asm
+    editor_audio.asm
+    TODO.asm
+    README.md
+    folders.txt
