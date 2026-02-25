@@ -1,4 +1,4 @@
-// NES Emulator Core Structure (C++ Skeleton)
+// 8BitStudio Emulator Core Structure (C++ Skeleton)
 // Place your emulator source files in this folder
 
 // cpu.cpp - 6502 CPU emulation

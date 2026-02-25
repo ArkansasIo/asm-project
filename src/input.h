@@ -1,4 +1,4 @@
-// NES Input emulation skeleton
+// 8BitStudio Input emulation skeleton
 #pragma once
 class Input {
 public:

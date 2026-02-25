@@ -1,4 +1,4 @@
-// NES 6502 CPU emulation skeleton
+// 8BitStudio 6502 CPU emulation skeleton
 #pragma once
 class CPU {
 public:

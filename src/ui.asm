@@ -1,4 +1,4 @@
-; NES ROM UI/GUI routines
+; 8BitStudio ROM UI/GUI routines
 	.include "constants.inc"
 
 ; Draw menu box (placeholder)

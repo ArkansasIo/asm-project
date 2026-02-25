@@ -1,4 +1,4 @@
-// NES PPU implementation (stub)
+// 8BitStudio PPU implementation (stub)
 #include "ppu.h"
 void PPU::step() {
     // TODO: Emulate one PPU step

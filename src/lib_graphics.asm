@@ -1,4 +1,4 @@
-; Graphics library for NES (6502 ASM)
+; Graphics library for 8BitStudio (6502 ASM)
 ; Draw sprite, tile, line, etc.
 Gfx_DrawSprite:
 	; TODO: Draw sprite at (X, Y)

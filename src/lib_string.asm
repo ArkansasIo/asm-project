@@ -1,4 +1,4 @@
-; String library for NES (6502 ASM)
+; String library for 8BitStudio (6502 ASM)
 ; Copy, compare, length, etc.
 Str_Copy:
 	; TODO: Copy string from src to dest

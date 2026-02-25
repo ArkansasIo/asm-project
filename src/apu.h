@@ -1,4 +1,4 @@
-// NES APU (audio) emulation skeleton
+// 8BitStudio APU (audio) emulation skeleton
 #pragma once
 class APU {
 public:

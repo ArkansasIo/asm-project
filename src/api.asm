@@ -1,4 +1,4 @@
-; NES ROM API: Exposed routines for game/editor
+; 8BitStudio ROM API: Exposed routines for game/editor
 	.include "constants.inc"
 
 ; API: Set background color

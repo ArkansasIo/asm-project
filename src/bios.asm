@@ -1,4 +1,4 @@
-; Simulated BIOS routine for NES ROM
+; Simulated BIOS routine for 8BitStudio ROM
 	.include "constants.inc"
 
 	.segment "CODE"

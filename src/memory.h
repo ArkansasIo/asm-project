@@ -1,4 +1,4 @@
-// NES Memory emulation skeleton
+// 8BitStudio Memory emulation skeleton
 #pragma once
 #include <string>
 class Memory {

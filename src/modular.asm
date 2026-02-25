@@ -1,4 +1,4 @@
-; NES ROM Modular Includes
+; 8BitStudio ROM Modular Includes
 	.include "constants.inc"
 	.include "dataset.asm"
 	.include "types.asm"

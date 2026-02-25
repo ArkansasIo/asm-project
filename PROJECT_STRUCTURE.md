@@ -1,11 +1,11 @@
-# NES Emulator Project Structure
+# 8BitStudio Project Structure
 
 ## Folders
-- src/: C++ NES emulator source code
+- src/: C++ 8BitStudio emulator source code
 - src16/: SNES (16-bit) ASM source code
 - docs/: Documentation and design docs
 
-## NES Emulator (src/)
+## 8BitStudio Emulator (src/)
 - main.cpp: Emulator entry point
 - cpu.h/cpu.cpp: 6502 CPU emulation
 - ppu.h/ppu.cpp: PPU (graphics) emulation
@@ -21,5 +21,5 @@
 - Use ca65/ld65 for src16/
 
 ## TODO
-- Implement all NES subsystems in src/
+- Implement all 8BitStudio subsystems in src/
 - Expand SNES ASM modules in src16/

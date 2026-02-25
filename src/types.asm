@@ -1,4 +1,4 @@
-; NES ROM Data Types and Structs (Assembly style)
+; 8BitStudio ROM Data Types and Structs (Assembly style)
 	.include "constants.inc"
 
 ; CMOS RAM struct

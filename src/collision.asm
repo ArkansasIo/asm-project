@@ -1,4 +1,4 @@
-; NES Collision Detection
+; 8BitStudio Collision Detection
 	.include "constants.inc"
 
 ; Check collision between two rectangles

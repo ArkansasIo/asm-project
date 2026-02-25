@@ -1,4 +1,4 @@
-; Utility library for NES (6502 ASM)
+; Utility library for 8BitStudio (6502 ASM)
 ; Delay, random, swap, etc.
 Util_Delay:
 	; Simple delay loop

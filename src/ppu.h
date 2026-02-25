@@ -1,4 +1,4 @@
-// NES PPU (graphics) emulation skeleton
+// 8BitStudio PPU (graphics) emulation skeleton
 #pragma once
 class PPU {
 public:

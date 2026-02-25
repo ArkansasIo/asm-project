@@ -1,4 +1,4 @@
-; Memory library for NES (6502 ASM)
+; Memory library for 8BitStudio (6502 ASM)
 ; Set, copy, clear, etc.
 Mem_Set:
 	; TODO: Set memory block to value

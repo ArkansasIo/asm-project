@@ -1,4 +1,4 @@
-; Math library for NES (6502 ASM)
+; Math library for 8BitStudio (6502 ASM)
 ; Add, subtract, multiply, divide, etc.
 Math_Add:
 	; A = A + X

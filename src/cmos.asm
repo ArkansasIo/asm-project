@@ -1,4 +1,4 @@
-; CMOS RAM routines for NES ROM
+; CMOS RAM routines for 8BitStudio ROM
 	.include "constants.inc"
 
 	.segment "ZEROPAGE"

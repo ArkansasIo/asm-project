@@ -1,7 +1,7 @@
-# NES Clone Game Design Document (GDD)
+# 8BitStudio Game Design Document (GDD)
 
 ## Game/ROM Overview
-A demonstration NES ROM with BIOS, splash, menus, CMOS RAM, and an in-ROM editor. Designed for educational and homebrew purposes.
+A demonstration 8BitStudio ROM with BIOS, splash, menus, CMOS RAM, and an in-ROM editor. Designed for educational and homebrew purposes.
 
 ## Features
 - Splash screen
@@ -19,10 +19,10 @@ A demonstration NES ROM with BIOS, splash, menus, CMOS RAM, and an in-ROM editor
 A future version will target a 16-bit platform (e.g., SNES), using 65816 assembly and expanded features.
 
 ## Technical Notes
-- Written in 6502 assembly for NES
+- Written in 6502 assembly for 8BitStudio
 - Modular source files in src/
 - CMOS RAM simulated in zero page
 
 ## Credits
-- Project by [Your Name]
+- Project by [Stephen]  https://github.com/ArkansasIo
 - Powered by open-source tools

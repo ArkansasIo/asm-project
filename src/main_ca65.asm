@@ -1,5 +1,12 @@
 ; ca65-compatible NES main.asm example
 	.include "constants.inc"
+	.include "dragonwarrior/data.asm"
+	.include "dragonwarrior/graphics.asm"
+	.include "dragonwarrior/sound.asm"
+	.include "dragonwarrior/map.asm"
+	.include "dragonwarrior/battle.asm"
+	.include "dragonwarrior/menu.asm"
+	.include "dragonwarrior/main.asm"
 	.include "dataset.asm"
 	.include "types.asm"
 	.include "cmos.asm"
@@ -47,7 +54,7 @@ RESET:
 	STX $2000
 	STX $2001
 	STX $4010
-	JMP Forever
+	JMP DW_Main
 
 Forever:
 	JMP Forever

@@ -1,4 +1,4 @@
-; NES ROM Data Structures and Types
+; 8BitStudio ROM Data Structures and Types
 	.include "constants.inc"
 
 ; CMOS RAM dataset (8 bytes for demo)

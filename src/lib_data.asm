@@ -1,4 +1,4 @@
-; Data/file library for NES (6502 ASM)
+; Data/file library for 8BitStudio (6502 ASM)
 ; Save/load to CMOS, ROM, etc.
 Data_SaveCMOS:
 	; TODO: Save data to CMOS RAM

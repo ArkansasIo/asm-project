@@ -1,4 +1,4 @@
-; NES Sound and Audio System (6502 ASM)
+; 8BitStudio Sound and Audio System (6502 ASM)
 	.include "constants.inc"
 
 ; Play a simple square wave tone on channel 1

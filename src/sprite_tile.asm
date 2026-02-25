@@ -1,4 +1,4 @@
-; NES Sprite and Tile Management
+; 8BitStudio Sprite and Tile Management
 	.include "constants.inc"
 
 ; Move sprite to (x, y)

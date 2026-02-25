@@ -13,3 +13,9 @@ EditorMenu_Draw:
 EditorMenu_HandleInput:
 	; TODO: Read controller, update selection, call actions
 	RTS
+.segment "EDITOR"
+EditorMenu:
+	; Draw editor menu
+	; Handle input for editing
+	; Example: display tile palette, cursor
+	RTS

@@ -1,4 +1,4 @@
-; NES Game Engine Core Logic
+; 8BitStudio Game Engine Core Logic
 	.include "constants.inc"
 
 ; Game loop entry point
@@ -16,3 +16,12 @@ Game_Update:
 Game_Draw:
 	; TODO: Add drawing logic here
 	RTS
+
+.segment "GAMEENGINE"
+GameEngine:
+    ; Main game loop
+    ; Player movement
+    ; Collision detection
+    ; Event handling
+    ; Example: update player, check collisions, process events
+    RTS
