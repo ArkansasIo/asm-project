@@ -55,7 +55,8 @@ RESET:
 	STX $2000
 	STX $2001
 	STX $4010
-	JMP DW_Main
+	JSR UI_RunGameBoyGUI
+	JMP BootForever
 
 BootForever:
 	JMP BootForever
