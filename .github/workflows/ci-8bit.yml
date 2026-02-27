@@ -1,0 +1,25 @@
+name: 8bit CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install cc65
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cc65
+
+      - name: Run strict 8-bit CI check
+        run: |
+          chmod +x ./build_8bit.sh ./ci_check_8bit.sh
+          ./ci_check_8bit.sh
