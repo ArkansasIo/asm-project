@@ -14,6 +14,7 @@ This is a homebrew 8BitStudio project, including:
 ### Linux (ca65 + ld65)
 - Build ROM: `./build_8bit.sh`
 - Run ROM in FCEUX: `./run_8bit.sh`
+- Run ROM from desktop host session: `./run_8bit_host.sh`
 
 The build output is `src/main_ca65.nes`.
 
