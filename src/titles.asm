@@ -1,5 +1,5 @@
 ; Title Names for 8BitStudio Project
-8BitStudioConsoleTitle:
+BitStudioConsoleTitle:
 	.asciiz "8BITSTUDIO CONSOLE"
 GameTitle:
 	.asciiz "HOMEBREW GAME"

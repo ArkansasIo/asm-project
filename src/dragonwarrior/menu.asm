@@ -5,30 +5,36 @@
 DW_MenuLoop:
     ; Route to the active menu mode.
     LDA DW_BattleActive
-    BEQ :field
+    BEQ @field
     LDA #DW_MENU_MODE_BATTLE
     STA DW_MenuMode
     JMP DW_BattleLoop
 
-:field:
+@field:
     LDA DW_MenuMode
     CMP #DW_MENU_MODE_COMMAND
-    BEQ DW_CommandMenu_HandleInput
+    BNE :+
+    JMP DW_CommandMenu_HandleInput
+:
     CMP #DW_MENU_MODE_SUBMENU_SPELL
-    BEQ DW_SpellSubmenu_HandleInput
+    BNE :+
+    JMP DW_SpellSubmenu_HandleInput
+:
     CMP #DW_MENU_MODE_SUBMENU_ITEM
-    BEQ DW_ItemSubmenu_HandleInput
+    BNE :+
+    JMP DW_ItemSubmenu_HandleInput
+:
 
     ; Field mode: START opens command menu.
     LDA DW_InputPressed
     AND #DW_BTN_START
-    BEQ :done
+    BEQ @done
     LDA #DW_MENU_MODE_COMMAND
     STA DW_MenuMode
     LDA #0
     STA DW_CommandMenuIndex
     JSR DW_CommandMenu_Draw
-:done:
+@done:
     RTS
 
 DW_CommandMenu_Draw:
@@ -40,50 +46,64 @@ DW_CommandMenu_Draw:
 DW_CommandMenu_HandleInput:
     LDA DW_InputPressed
     AND #DW_BTN_UP
-    BEQ :checkDown
+    BEQ @checkDown
     LDA DW_CommandMenuIndex
-    BEQ :checkDown
+    BEQ @checkDown
     DEC DW_CommandMenuIndex
     RTS
-:checkDown:
+@checkDown:
     LDA DW_InputPressed
     AND #DW_BTN_DOWN
-    BEQ :checkA
+    BEQ @checkA
     LDA DW_CommandMenuIndex
     CMP #7
-    BCS :checkA
+    BCS @checkA
     INC DW_CommandMenuIndex
     RTS
-:checkA:
+@checkA:
     LDA DW_InputPressed
     AND #DW_BTN_A
-    BEQ :checkB
+    BEQ @checkB
     JSR DW_CommandMenu_Execute
     RTS
-:checkB:
+@checkB:
     LDA DW_InputPressed
     AND #DW_BTN_B
-    BEQ :done
+    BEQ @done
     LDA #DW_MENU_MODE_FIELD
     STA DW_MenuMode
-:done:
+@done:
     RTS
 
 DW_CommandMenu_Execute:
     LDA DW_CommandMenuIndex
-    BEQ DW_FieldTalk
+    BNE :+
+    JMP DW_FieldTalk
+:
     CMP #1
-    BEQ DW_CommandMenu_OpenSpellSubmenu
+    BNE :+
+    JMP DW_CommandMenu_OpenSpellSubmenu
+:
     CMP #2
-    BEQ DW_CommandMenu_ShowStatus
+    BNE :+
+    JMP DW_CommandMenu_ShowStatus
+:
     CMP #3
-    BEQ DW_CommandMenu_OpenItemSubmenu
+    BNE :+
+    JMP DW_CommandMenu_OpenItemSubmenu
+:
     CMP #4
-    BEQ DW_FieldSearch
+    BNE :+
+    JMP DW_FieldSearch
+:
     CMP #5
-    BEQ DW_FieldUseStairs
+    BNE :+
+    JMP DW_FieldUseStairs
+:
     CMP #6
-    BEQ DW_FieldOpenDoor
+    BNE :+
+    JMP DW_FieldOpenDoor
+:
     JMP DW_FieldTake
 
 DW_CommandMenu_OpenSpellSubmenu:
@@ -109,33 +129,33 @@ DW_CommandMenu_ShowStatus:
 DW_SpellSubmenu_HandleInput:
     LDA DW_InputPressed
     AND #DW_BTN_UP
-    BEQ :checkDown
+    BEQ @checkDown
     LDA DW_SubmenuIndex
-    BEQ :checkDown
+    BEQ @checkDown
     DEC DW_SubmenuIndex
     RTS
-:checkDown:
+@checkDown:
     LDA DW_InputPressed
     AND #DW_BTN_DOWN
-    BEQ :checkA
+    BEQ @checkA
     LDA DW_SubmenuIndex
     CMP #3
-    BCS :checkA
+    BCS @checkA
     INC DW_SubmenuIndex
     RTS
-:checkA:
+@checkA:
     LDA DW_InputPressed
     AND #DW_BTN_A
-    BEQ :checkB
+    BEQ @checkB
     JSR DW_SpellSubmenu_UseSelected
     RTS
-:checkB:
+@checkB:
     LDA DW_InputPressed
     AND #DW_BTN_B
-    BEQ :done
+    BEQ @done
     LDA #DW_MENU_MODE_COMMAND
     STA DW_MenuMode
-:done:
+@done:
     RTS
 
 DW_SpellSubmenu_UseSelected:
@@ -149,10 +169,10 @@ DW_SpellSubmenu_UseSelected:
 
 DW_SpellCastHeal:
     LDA DW_HasSpellHeal
-    BEQ :fail
+    BEQ @fail
     LDA DW_PlayerMP
     CMP #3
-    BCC :fail
+    BCC @fail
     SEC
     SBC #3
     STA DW_PlayerMP
@@ -160,14 +180,14 @@ DW_SpellCastHeal:
     CLC
     ADC #10
     CMP DW_PlayerMaxHP
-    BCC :store
+    BCC @store
     LDA DW_PlayerMaxHP
-:store:
+@store:
     STA DW_PlayerHP
     LDA #20
     STA DW_MessageId
     RTS
-:fail:
+@fail:
     LDA #21
     STA DW_MessageId
     RTS
@@ -175,43 +195,43 @@ DW_SpellCastHeal:
 DW_SpellCastHurt:
     ; In field mode, Hurt has no effect; in battle it's handled by battle logic.
     LDA DW_BattleActive
-    BEQ :fieldNoEffect
+    BEQ @fieldNoEffect
     JMP DW_BattleSpell
-:fieldNoEffect:
+@fieldNoEffect:
     LDA #22
     STA DW_MessageId
     RTS
 
 DW_SpellCastSleep:
     LDA DW_HasSpellSleep
-    BEQ :fail
+    BEQ @fail
     LDA DW_PlayerMP
     CMP #2
-    BCC :fail
+    BCC @fail
     SEC
     SBC #2
     STA DW_PlayerMP
     LDA #23
     STA DW_MessageId
     RTS
-:fail:
+@fail:
     LDA #21
     STA DW_MessageId
     RTS
 
 DW_SpellCastRadiant:
     LDA DW_HasSpellRadiant
-    BEQ :fail
+    BEQ @fail
     LDA DW_PlayerMP
     CMP #2
-    BCC :fail
+    BCC @fail
     SEC
     SBC #2
     STA DW_PlayerMP
     LDA #24
     STA DW_MessageId
     RTS
-:fail:
+@fail:
     LDA #21
     STA DW_MessageId
     RTS
@@ -219,33 +239,33 @@ DW_SpellCastRadiant:
 DW_ItemSubmenu_HandleInput:
     LDA DW_InputPressed
     AND #DW_BTN_UP
-    BEQ :checkDown
+    BEQ @checkDown
     LDA DW_SubmenuIndex
-    BEQ :checkDown
+    BEQ @checkDown
     DEC DW_SubmenuIndex
     RTS
-:checkDown:
+@checkDown:
     LDA DW_InputPressed
     AND #DW_BTN_DOWN
-    BEQ :checkA
+    BEQ @checkA
     LDA DW_SubmenuIndex
     CMP #3
-    BCS :checkA
+    BCS @checkA
     INC DW_SubmenuIndex
     RTS
-:checkA:
+@checkA:
     LDA DW_InputPressed
     AND #DW_BTN_A
-    BEQ :checkB
+    BEQ @checkB
     JSR DW_ItemSubmenu_UseSelected
     RTS
-:checkB:
+@checkB:
     LDA DW_InputPressed
     AND #DW_BTN_B
-    BEQ :done
+    BEQ @done
     LDA #DW_MENU_MODE_COMMAND
     STA DW_MenuMode
-:done:
+@done:
     RTS
 
 DW_ItemSubmenu_UseSelected:
@@ -259,20 +279,20 @@ DW_ItemSubmenu_UseSelected:
 
 DW_ItemUseHerb:
     LDA DW_InventoryHerb
-    BEQ :fail
+    BEQ @fail
     DEC DW_InventoryHerb
     LDA DW_PlayerHP
     CLC
     ADC #8
     CMP DW_PlayerMaxHP
-    BCC :storeHP
+    BCC @storeHP
     LDA DW_PlayerMaxHP
-:storeHP:
+@storeHP:
     STA DW_PlayerHP
     LDA #25
     STA DW_MessageId
     RTS
-:fail:
+@fail:
     LDA #12
     STA DW_MessageId
     RTS
@@ -282,19 +302,19 @@ DW_ItemUseKey:
 
 DW_ItemUseTorch:
     LDA DW_InventoryTorch
-    BEQ :fail
+    BEQ @fail
     DEC DW_InventoryTorch
     LDA #26
     STA DW_MessageId
     RTS
-:fail:
+@fail:
     LDA #12
     STA DW_MessageId
     RTS
 
 DW_ItemUseWing:
     LDA DW_InventoryWing
-    BEQ :fail
+    BEQ @fail
     DEC DW_InventoryWing
     LDA #0
     STA DW_PlayerX
@@ -302,7 +322,7 @@ DW_ItemUseWing:
     LDA #27
     STA DW_MessageId
     RTS
-:fail:
+@fail:
     LDA #12
     STA DW_MessageId
     RTS

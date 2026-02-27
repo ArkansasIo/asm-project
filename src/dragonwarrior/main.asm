@@ -26,11 +26,11 @@ DW_TitleScreen:
     ; Placeholder title flow. START confirms begin.
     LDA #30
     STA DW_MessageId
-:waitStart:
+@waitStart:
     JSR DW_InputPoll
     LDA DW_InputPressed
     AND #DW_BTN_START
-    BEQ :waitStart
+    BEQ @waitStart
     LDA #31
     STA DW_MessageId
     RTS
@@ -39,12 +39,12 @@ DW_Tick:
     JSR DW_InputPoll
     JSR DW_MenuLoop
     LDA DW_BattleActive
-    BNE :battle
+    BNE @battle
     JSR DW_MapLoop
-    JMP :draw
-:battle:
+    JMP @draw
+@battle:
     JSR DW_BattleLoop
-:draw:
+@draw:
     JSR DW_DrawFrame
     RTS
 
@@ -58,13 +58,13 @@ DW_InputPoll:
     LDX #8
     LDA #0
     STA DW_InputHeld
-:readLoop:
+@readLoop:
     LDA $4016
     AND #1
     ROR A
     ROL DW_InputHeld
     DEX
-    BNE :readLoop
+    BNE @readLoop
 
     ; pressed = held & (~prev)
     LDA DW_InputPrev

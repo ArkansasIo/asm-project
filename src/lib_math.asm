@@ -2,14 +2,16 @@
 ; Add, subtract, multiply, divide, etc.
 Math_Add:
 	; A = A + X
+	TXA
 	CLC
-	ADC X
+	ADC Math_MulResult
 	RTS
 
 Math_Sub:
 	; A = A - X
+	TXA
 	SEC
-	SBC X
+	SBC Math_MulResult
 	RTS
 
 Math_Mul:

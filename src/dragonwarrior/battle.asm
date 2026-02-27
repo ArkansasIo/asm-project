@@ -21,52 +21,60 @@ DW_BattleStart:
 
 DW_BattleLoop:
     LDA DW_BattleActive
-    BEQ :done
+    BEQ @done
     JSR DW_BattleHandleInput
-:done:
+@done:
     RTS
 
 DW_BattleHandleInput:
     LDA DW_InputPressed
     AND #DW_BTN_UP
-    BEQ :checkDown
+    BEQ @checkDown
     LDA DW_BattleMenuIndex
-    BEQ :checkDown
+    BEQ @checkDown
     DEC DW_BattleMenuIndex
     RTS
-:checkDown:
+@checkDown:
     LDA DW_InputPressed
     AND #DW_BTN_DOWN
-    BEQ :checkA
+    BEQ @checkA
     LDA DW_BattleMenuIndex
     CMP #4
-    BCS :checkA
+    BCS @checkA
     INC DW_BattleMenuIndex
     RTS
-:checkA:
+@checkA:
     LDA DW_InputPressed
     AND #DW_BTN_A
-    BEQ :checkB
+    BEQ @checkB
     JSR DW_BattleExecuteSelection
     RTS
-:checkB:
+@checkB:
     LDA DW_InputPressed
     AND #DW_BTN_B
-    BEQ :done
+    BEQ @done
     ; B defaults to parry.
     JSR DW_BattleParry
-:done:
+@done:
     RTS
 
 DW_BattleExecuteSelection:
     LDA DW_BattleMenuIndex
-    BEQ DW_BattleFight
+    BNE :+
+    JMP DW_BattleFight
+:
     CMP #1
-    BEQ DW_BattleSpell
+    BNE :+
+    JMP DW_BattleSpell
+:
     CMP #2
-    BEQ DW_BattleItem
+    BNE :+
+    JMP DW_BattleItem
+:
     CMP #3
-    BEQ DW_BattleRun
+    BNE :+
+    JMP DW_BattleRun
+:
     JMP DW_BattleParry
 
 DW_BattleFight:
@@ -86,26 +94,26 @@ DW_BattleFight:
     LDA DW_EnemyHP
     SEC
     SBC DW_ActionResult
-    BCS :storeEnemy
+    BCS @storeEnemy
     LDA #0
-:storeEnemy:
+@storeEnemy:
     STA DW_EnemyHP
-    BEQ :victory
+    BEQ @victory
 
     JSR DW_BattleEnemyTurn
     RTS
 
-:victory:
+@victory:
     JSR DW_BattleOnVictory
     RTS
 
 DW_BattleSpell:
     ; Default battle spell is HURT if known.
     LDA DW_HasSpellHurt
-    BEQ :fail
+    BEQ @fail
     LDA DW_PlayerMP
     CMP #2
-    BCC :fail
+    BCC @fail
     SEC
     SBC #2
     STA DW_PlayerMP
@@ -118,17 +126,17 @@ DW_BattleSpell:
     LDA DW_EnemyHP
     SEC
     SBC DW_ActionResult
-    BCS :storeEnemy
+    BCS @storeEnemy
     LDA #0
-:storeEnemy:
+@storeEnemy:
     STA DW_EnemyHP
-    BEQ :victory
+    BEQ @victory
     JSR DW_BattleEnemyTurn
     RTS
-:victory:
+@victory:
     JSR DW_BattleOnVictory
     RTS
-:fail:
+@fail:
     LDA #10
     STA DW_MessageId
     RTS
@@ -136,21 +144,21 @@ DW_BattleSpell:
 DW_BattleItem:
     ; Use herb if available.
     LDA DW_InventoryHerb
-    BEQ :fail
+    BEQ @fail
     DEC DW_InventoryHerb
     LDA DW_PlayerHP
     CLC
     ADC #8
     CMP DW_PlayerMaxHP
-    BCC :storeHP
+    BCC @storeHP
     LDA DW_PlayerMaxHP
-:storeHP:
+@storeHP:
     STA DW_PlayerHP
     LDA #11
     STA DW_MessageId
     JSR DW_BattleEnemyTurn
     RTS
-:fail:
+@fail:
     LDA #12
     STA DW_MessageId
     RTS
@@ -159,13 +167,13 @@ DW_BattleRun:
     JSR DW_RngNext
     LDA DW_RngState
     AND #$03
-    BEQ :fail
+    BEQ @fail
     LDA #0
     STA DW_BattleActive
     LDA #13
     STA DW_MessageId
     RTS
-:fail:
+@fail:
     LDA #14
     STA DW_MessageId
     JSR DW_BattleEnemyTurn
@@ -204,13 +212,13 @@ DW_BattleApplyDamage:
     LDA DW_PlayerHP
     SEC
     SBC DW_ActionResult
-    BCS :store
+    BCS @store
     LDA #0
-:store:
+@store:
     STA DW_PlayerHP
-    BNE :done
+    BNE @done
     JSR DW_BattleOnDefeat
-:done:
+@done:
     RTS
 
 DW_BattleOnVictory:

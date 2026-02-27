@@ -20,10 +20,12 @@
 	.include "editor_menu.asm"
 	.include "game_menu.asm"
 	.include "engine_menu.asm"
-	.include "nes_logo.asm"
+	.include "8bitstudio_logo.asm"
 	.include "game_logo.asm"
 	.include "engine_logo.asm"
 	.include "titles.asm"
+	.include "sound_system.asm"
+	.include "main.asm"
 	.include "lib_math.asm"
 	.include "lib_string.asm"
 	.include "lib_memory.asm"
@@ -36,13 +38,12 @@
 .segment "HEADER"
 	.byte "N", "E", "S", $1A ; iNES header
 	.byte 1 ; 1x 16KB PRG
-	.byte 1 ; 1x 8KB CHR
+	.byte 0 ; 0x 8KB CHR (CHR-RAM)
 	.byte 0 ; Mapper, mirroring
 	.byte 0 ; Reserved
 	.res 8, 0
 
 .segment "STARTUP"
-	.org $C000
 RESET:
 	SEI
 	CLD
@@ -56,11 +57,10 @@ RESET:
 	STX $4010
 	JMP DW_Main
 
-Forever:
-	JMP Forever
+BootForever:
+	JMP BootForever
 
 .segment "VECTORS"
-	.org $FFFA
 	.word NMI
 	.word RESET
 	.word IRQ

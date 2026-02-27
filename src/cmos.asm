@@ -1,6 +1,6 @@
 ; CMOS RAM routines for 8BitStudio ROM
 	.include "constants.inc"
 
-	.segment "ZEROPAGE"
+	.segment "RAM"
 CMOS_RAM:
-	.res 8, 0 ; 8 bytes of CMOS RAM
+	.res 8 ; 8 bytes of CMOS RAM

@@ -45,13 +45,13 @@ DW_FieldCheckEncounter:
     ; 1/8 chance after movement button input.
     LDA DW_InputPressed
     AND #(DW_BTN_UP | DW_BTN_DOWN | DW_BTN_LEFT | DW_BTN_RIGHT)
-    BEQ :done
+    BEQ @done
     JSR DW_RngNext
     LDA DW_RngState
     AND #$07
-    BNE :done
+    BNE @done
     JSR DW_BattleStart
-:done:
+@done:
     RTS
 
 DW_FieldTalk:
@@ -67,7 +67,7 @@ DW_FieldSearch:
     JSR DW_RngNext
     LDA DW_RngState
     AND #$03
-    BNE :notFound
+    BNE @notFound
     INC DW_PlayerGoldLo
     BNE :+
     INC DW_PlayerGoldHi
@@ -77,7 +77,7 @@ DW_FieldSearch:
     LDA #1
     STA DW_ActionResult
     RTS
-:notFound:
+@notFound:
     LDA #3
     STA DW_MessageId
     LDA #0
@@ -97,14 +97,14 @@ DW_FieldUseStairs:
 
 DW_FieldOpenDoor:
     LDA DW_InventoryKey
-    BEQ :noKey
+    BEQ @noKey
     DEC DW_InventoryKey
     LDA #5
     STA DW_MessageId
     LDA #1
     STA DW_ActionResult
     RTS
-:noKey:
+@noKey:
     LDA #6
     STA DW_MessageId
     LDA #0
@@ -116,14 +116,14 @@ DW_FieldTake:
     JSR DW_RngNext
     LDA DW_RngState
     AND #1
-    BEQ :herb
+    BEQ @herb
     INC DW_InventoryKey
     LDA #7
     STA DW_MessageId
     LDA #1
     STA DW_ActionResult
     RTS
-:herb:
+@herb:
     INC DW_InventoryHerb
     LDA #8
     STA DW_MessageId

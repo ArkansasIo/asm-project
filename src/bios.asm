@@ -87,11 +87,17 @@ MenuLoop:
 	JSR ReadController
 	LDA menu_selection
 	CMP #0
-	BEQ Menu_StartGame
+	BNE :+
+	JMP Menu_StartGame
+:
 	CMP #1
-	BEQ Menu_CMOS
+	BNE :+
+	JMP Menu_CMOS
+:
 	CMP #2
-	BEQ Menu_Editor
+	BNE :+
+	JMP Menu_Editor
+:
 	JMP MenuLoop
 
 ; --- Draw Menu Routine (placeholder) ---
@@ -123,8 +129,10 @@ rc_done:
 	RTS
 
 ; --- Menu Selection Variables ---
-	.segment "ZEROPAGE"
-menu_selection: .res 1, 0
+	.segment "RAM"
+menu_selection: .res 1
+
+	.segment "CODE"
 
 ; --- Menu Actions ---
 Menu_StartGame:
@@ -206,5 +214,5 @@ EditorInc:
 	STA CMOS_RAM_ADDR
 	RTS
 
-	.segment "ZEROPAGE"
-editor_toggle: .res 1, 0
+	.segment "RAM"
+editor_toggle: .res 1

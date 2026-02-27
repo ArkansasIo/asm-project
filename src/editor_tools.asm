@@ -39,7 +39,7 @@ Editor_EditEvent:
 	RTS
 
 ; Place tile at cursor
-Editor_PlaceTile:
+Editor_PlaceTileAtCursor:
 	; TODO: Write tile to level data
 	RTS
 

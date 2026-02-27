@@ -3,40 +3,40 @@
 
 ; CMOS RAM struct
 .struct CMOS_RAM_STRUCT
-	byte0 .byte 0
-	byte1 .byte 0
-	byte2 .byte 0
-	byte3 .byte 0
-	byte4 .byte 0
-	byte5 .byte 0
-	byte6 .byte 0
-	byte7 .byte 0
+	byte0 .byte
+	byte1 .byte
+	byte2 .byte
+	byte3 .byte
+	byte4 .byte
+	byte5 .byte
+	byte6 .byte
+	byte7 .byte
 .endstruct
 
 ; ROM struct (level data)
 .struct ROM_STRUCT
-	tile0 .byte 0
-	tile1 .byte 0
-	tile2 .byte 0
-	tile3 .byte 0
-	tile4 .byte 0
-	tile5 .byte 0
-	tile6 .byte 0
-	tile7 .byte 0
+	tile0 .byte
+	tile1 .byte
+	tile2 .byte
+	tile3 .byte
+	tile4 .byte
+	tile5 .byte
+	tile6 .byte
+	tile7 .byte
 .endstruct
 
 ; BIOS struct
 .struct BIOS_STRUCT
-	setting0 .byte 0
-	setting1 .byte 0
-	setting2 .byte 0
-	setting3 .byte 0
+	setting0 .byte
+	setting1 .byte
+	setting2 .byte
+	setting3 .byte
 .endstruct
 
 ; Console struct
 .struct CONSOLE_STRUCT
-	info0 .byte 0
-	info1 .byte 0
-	info2 .byte 0
-	info3 .byte 0
+	info0 .byte
+	info1 .byte
+	info2 .byte
+	info3 .byte
 .endstruct
